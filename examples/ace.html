@@ -13,7 +13,7 @@
 
   <!-- Firepad -->
   <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
-  <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
+  <script src="../dist/firepad.min.js"></script>
 
   <style>
     html { height: 100%; }
@@ -45,15 +45,18 @@
       session.setUseWorker(false);
       session.setMode("ace/mode/javascript");
 
+        //var backupref = new Firebase('https://sizzling-fire-7997.firebaseio.com/backup');
+        var backupref = new Firebase('wss://rethink.hackerrank.com/mihirbackup');
       //// Create Firepad.
       var firepad = Firepad.fromACE(firepadRef, editor, {
+          backup: backupref,
         defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
       });
     }
 
     // Helper to get hash from end of URL or generate a random one.
     function getExampleRef() {
-      var ref = new Firebase('https://firepad.firebaseio-demo.com');
+      var ref = new Firebase('https://sizzling-fire-7997.firebaseio.com/master');
       var hash = window.location.hash.replace(/#/g, '');
       if (hash) {
         ref = ref.child(hash);
